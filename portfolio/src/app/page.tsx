@@ -80,11 +80,11 @@ export default function Portfolio() {
       description: "Advanced CI/CD and infrastructure automation",
     },
     {
-      name: "AWS Security Speciality",
+      name: "AWS Security Specialty",
       provider: "AWS",
       status: "upcoming",
       date: "2026",
-      level: "Specialty",
+      level: "Speciality",
       description: "Advanced security practices and compliance",
     },
   ]
@@ -130,13 +130,13 @@ export default function Portfolio() {
 
   const getLevelColor = (level: string) => {
     switch (level) {
-      case "foundational":
+      case "Foundational":
         return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200"
-      case "associate":
+      case "Associate":
         return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
-      case "professional":
+      case "Professional":
         return "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200"
-      case "speciality":
+      case "Speciality":
         return "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200"
       default:
         return "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200"
@@ -187,8 +187,8 @@ export default function Portfolio() {
             </h2>
             <div className="text-center max-w-4xl mx-auto">
               <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-                Hi, I'm Rizwan! I'm an AWS Cloud Engineer who loves designing secure and reliable cloud solutions
-                that actually make life easier for businesses. Over the past few years, I've worked on everything from
+                Hi, I'm Rizwan! I'm an AWS Cloud Engineer who loves designing secure and reliable cloud solutions that
+                actually make life easier for businesses. Over the past few years, I've worked on everything from
                 building serverless applications and setting up disaster recovery plans, to improving security
                 frameworks and cutting deployment times with automation.
               </p>
@@ -249,53 +249,45 @@ export default function Portfolio() {
         </div>
       </section>
 
+      {/* Certification Roadmap */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
         <div className="max-w-6xl mx-auto">
           <div className="opacity-0 animate-fade-in-up">
             <h2 className="text-3xl font-bold text-center mb-12 font-[family-name:var(--font-space-grotesk)]">
               Certification Roadmap
             </h2>
-            <div className="relative">
-              {/* Timeline line */}
-              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-border hidden md:block"></div>
-
-              <div className="space-y-8">
+            <div className="max-w-4xl mx-auto">
+              <div className="space-y-6">
                 {certifications.map((cert, index) => (
-                  <div key={cert.name} className="relative flex items-start gap-6">
-                    {/* Timeline dot */}
-                    <div className="hidden md:flex absolute left-6 w-4 h-4 bg-background border-2 border-accent rounded-full -translate-x-1/2"></div>
-
-                    <Card
-                      className={`flex-1 transition-all duration-300 hover:shadow-lg ${
-                        cert.status === "completed"
-                          ? "border-green-200 bg-green-50/50 dark:border-green-800 dark:bg-green-950/20"
-                          : cert.status === "in-progress"
-                            ? "border-yellow-200 bg-yellow-50/50 dark:border-yellow-800 dark:bg-yellow-950/20"
-                            : "border-gray-200 bg-gray-50/50 dark:border-gray-800 dark:bg-gray-950/20"
-                      }`}
-                    >
-                      <CardContent className="p-6">
-                        <div className="flex items-start justify-between gap-4">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-3 mb-2">
-                              {getStatusIcon(cert.status)}
-                              <h3 className="text-xl font-semibold font-[family-name:var(--font-space-grotesk)]">
-                                {cert.name}
-                              </h3>
-                            </div>
-                            <div className="flex items-center gap-3 mb-3">
-                              <Badge variant="outline" className="text-xs">
-                                {cert.provider}
-                              </Badge>
-                              <Badge className={`text-xs ${getLevelColor(cert.level)}`}>{cert.level}</Badge>
-                              <span className="text-sm text-muted-foreground">{cert.date}</span>
-                            </div>
-                            <p className="text-muted-foreground leading-relaxed">{cert.description}</p>
+                  <Card
+                    key={cert.name}
+                    className={`transition-all duration-300 hover:shadow-lg ${
+                      cert.status === "completed"
+                        ? "border-green-200 bg-green-50/50 dark:border-green-800 dark:bg-green-950/20"
+                        : cert.status === "in-progress"
+                          ? "border-yellow-200 bg-yellow-50/50 dark:border-yellow-800 dark:bg-yellow-950/20"
+                          : "border-gray-200 bg-gray-50/50 dark:border-gray-800 dark:bg-gray-950/20"
+                    }`}
+                  >
+                    <CardContent className="p-6">
+                      <div className="flex items-start gap-4">
+                        <div className="flex-shrink-0 mt-1">{getStatusIcon(cert.status)}</div>
+                        <div className="flex-grow">
+                          <div className="flex flex-wrap items-center gap-2 mb-2">
+                            <h3 className="text-lg font-semibold font-[family-name:var(--font-space-grotesk)]">
+                              {cert.name}
+                            </h3>
+                            <Badge variant="outline" className="text-xs">
+                              {cert.provider}
+                            </Badge>
+                            <Badge className={`text-xs ${getLevelColor(cert.level)}`}>{cert.level}</Badge>
                           </div>
+                          <p className="text-sm text-muted-foreground mb-2">{cert.date}</p>
+                          <p className="text-muted-foreground leading-relaxed">{cert.description}</p>
                         </div>
-                      </CardContent>
-                    </Card>
-                  </div>
+                      </div>
+                    </CardContent>
+                  </Card>
                 ))}
               </div>
             </div>
