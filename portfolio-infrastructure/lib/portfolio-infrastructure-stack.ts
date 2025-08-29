@@ -13,7 +13,7 @@ export class PortfolioInfrastructureStack extends cdk.Stack {
       sourceCodeProvider: new amplify.GitHubSourceCodeProvider({
         owner: 'CloudRizz',
         repository: 'portfolio_website',
-        oauthToken: cdk.SecretValue.secretsManager('github-token') 
+        oauthToken: cdk.SecretValue.secretsManager('github-token'),
       }),
       buildSpec: codebuild.BuildSpec.fromObjectToYaml({
         version: '1.0',
@@ -21,34 +21,39 @@ export class PortfolioInfrastructureStack extends cdk.Stack {
           phases: {
             preBuild: {
               commands: [
-                'echo "Starting this build"', 
-                'cd portfolio',
+                'echo "Starting preBuild..."',
+                'cd portfolio',      // go to frontend folder
                 'npm install'
               ],
             },
             build: {
               commands: [
-                'echo "Building our NextJs app"',
+                'echo "Building Next.js app..."',
                 'npm run build-and-export',
-                'echo "Build is completed"', 
+                'echo "Build completed."',
               ],
             },
           },
           artifacts: {
-            baseDirectory: 'out',    // fixed path
+            baseDirectory: 'out',   // must match Next.js output folder
             files: ['**/*']
           },
-          cache: { 
+          cache: {
             paths: [
-              'node_modules/**/*',    // fixed typo
-              '.next/cache/**/*',
+              'node_modules/**/*',
+              '.next/cache/**/*'
             ]
+          },
+          // Optional: specify Node version for consistency
+          runtime: {
+            nodejs: '20'
           }
         }
       })
     });
 
-    const mainBranch = amplifyApp.addBranch('main', {
+    // Add main branch with autoBuild
+    amplifyApp.addBranch('main', {
       autoBuild: true
     });
   }
