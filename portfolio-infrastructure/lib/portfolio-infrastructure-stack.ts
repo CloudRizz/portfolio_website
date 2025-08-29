@@ -2,7 +2,6 @@ import * as cdk from 'aws-cdk-lib';
 import * as amplify from '@aws-cdk/aws-amplify-alpha';
 import * as codebuild from 'aws-cdk-lib/aws-codebuild';
 import { Construct } from 'constructs';
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
 
 export class PortfolioInfrastructureStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -11,14 +10,11 @@ export class PortfolioInfrastructureStack extends cdk.Stack {
     // Amplify Application
     const amplifyApp = new amplify.App(this, 'PortfolioApplication', {
       appName: 'Portfolio',
-      // Connect to my github repo
       sourceCodeProvider: new amplify.GitHubSourceCodeProvider({
         owner: 'CloudRizz',
         repository: 'portfolio_website',
         oauthToken: cdk.SecretValue.secretsManager('github-token') 
       }),
-
-      // Build Specification
       buildSpec: codebuild.BuildSpec.fromObjectToYaml({
         version: '1.0',
         frontend: {
@@ -39,20 +35,20 @@ export class PortfolioInfrastructureStack extends cdk.Stack {
             },
           },
           artifacts: {
-            baseDirectory: 'portfolio/out',
+            baseDirectory: 'out',    // fixed path
             files: ['**/*']
           },
           cache: { 
             paths: [
-              'node/modules/**/*',
+              'node_modules/**/*',    // fixed typo
               '.next/cache/**/*',
-              ],
-            }, 
-          },
-        }),
-      });
+            ]
+          }
+        }
+      })
+    });
 
-    const mainBranch = amplifyApp.addBranch('main',{
+    const mainBranch = amplifyApp.addBranch('main', {
       autoBuild: true
     });
   }
