@@ -22,39 +22,39 @@ export class PortfolioInfrastructureStack extends cdk.Stack {
             preBuild: {
               commands: [
                 'echo "Starting preBuild..."',
-                'cd portfolio',      // go to frontend folder
+                'cd portfolio',        // go to frontend folder
                 'npm install'
               ],
             },
             build: {
               commands: [
-                'echo "Building Next.js app..."',
+                'echo "Building Next.js static app..."',
                 'npm run build-and-export',
                 'echo "Build completed."',
               ],
             },
           },
           artifacts: {
-            baseDirectory: 'out',   // must match Next.js output folder
-            files: ['**/*']
+            baseDirectory: 'out',   // Next.js export folder
+            files: ['**/*'],
           },
           cache: {
             paths: [
               'node_modules/**/*',
-              '.next/cache/**/*'
-            ]
+              '.next/cache/**/*',
+            ],
           },
-          // Optional: specify Node version for consistency
+          // Explicit Node.js version
           runtime: {
-            nodejs: '20'
-          }
-        }
-      })
+            nodejs: '20',
+          },
+        },
+      }),
     });
 
-    // Add main branch with autoBuild
+    // Main branch with autoBuild
     amplifyApp.addBranch('main', {
-      autoBuild: true
+      autoBuild: true,
     });
   }
 }
