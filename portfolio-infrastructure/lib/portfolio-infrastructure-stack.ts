@@ -40,7 +40,7 @@ export class PortfolioInfrastructureStack extends cdk.Stack {
             },
           },
           artifacts: {
-            baseDirectory: 'out',   // Next.js export folder
+            baseDirectory: 'portfolio/out',   // Next.js export folder
             files: ['**/*'],
           },
           cache: {
