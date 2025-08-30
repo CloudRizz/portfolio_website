@@ -22,8 +22,13 @@ export class PortfolioInfrastructureStack extends cdk.Stack {
             preBuild: {
               commands: [
                 'echo "Starting preBuild..."',
+                'echo pwd',
+                'ls -la',
                 'cd portfolio',        // go to frontend folder
-                'npm install'
+                'echo "changed to portfolio folder"',
+                'echo pwd',
+                'ls -la',
+                'npm ci'
               ],
             },
             build: {
