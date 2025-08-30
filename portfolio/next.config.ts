@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
-  trailingSlash: true,
+  output: 'export',       // static export
+  trailingSlash: true,    // for static hosting URLs
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -9,13 +9,11 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    unoptimized: true
+    unoptimized: true,
   },
-  // Ensure static export works with AWS Amplify
-  distDir: 'out',
-  // Enable static optimization
+  distDir: 'out',         // output folder for Amplify
   experimental: {
-    optimizeCss: true
+    optimizeCss: true,
   }
 }
 
