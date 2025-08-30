@@ -25,7 +25,7 @@ import {
   Target,
 } from "lucide-react"
 
-export default function Portfolio() {
+export default function Home() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -150,7 +150,7 @@ export default function Portfolio() {
         <div className="max-w-4xl mx-auto text-center">
           <div className="opacity-0 animate-fade-in-up">
             <img
-              src="/riz1.jpg"
+              src="/riz1.png"
               alt="Rizwan Hussain"
               className="w-40 h-40 rounded-full mx-auto mb-8 border-4 border-accent/20"
             />

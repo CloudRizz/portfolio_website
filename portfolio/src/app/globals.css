@@ -1,8 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-
-
 @custom-variant dark (&:is(.dark *));
 
 :root {
@@ -42,8 +40,8 @@
   --sidebar-ring: oklch(0.646 0.222 280.116);
 }
 
+/* Added dark mode tokens for consistent theming */
 .dark {
-  /* Updated dark mode tokens for consistent theming */
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
@@ -115,8 +113,8 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  /* Added custom font variables for Space Grotesk and DM Sans */
-  --font-sans: var(--font-geist-sans);
+  /* Updated font variables for DM Sans and Space Grotesk */
+  --font-sans: var(--font-dm-sans);
   --font-mono: var(--font-geist-mono);
 }
 
@@ -130,8 +128,8 @@
     background: linear-gradient(135deg, oklch(1 0 0) 0%, oklch(0.98 0.02 280) 50%, oklch(0.96 0.04 280) 100%);
   }
 
+  /* Added dark mode gradient background */
   .dark body {
-    /* Added dark mode gradient background */
     background: linear-gradient(135deg, oklch(0.145 0 0) 0%, oklch(0.16 0.03 280) 50%, oklch(0.18 0.05 280) 100%);
   }
 
@@ -159,6 +157,7 @@
   }
   to {
     opacity: 1;
+    transform: translateY(0);
   }
 }
 
